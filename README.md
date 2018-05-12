@@ -1,6 +1,9 @@
 # mybatisOne2Many
 # mybatisMany2One
 
+
+多表映射的多对一关系要用到 mybitis 的 association 来加以实现。这篇介绍的是多表中的多对一表关联查询。
+
 ##user数据库初始化
 
 ```
