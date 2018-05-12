@@ -10,6 +10,7 @@
 		<result property="id" column="user_id" />
 		<result property="username" column="username" />
 		<result property="mobile" column="mobile" />
+		<!-- 在Java实体对象对中，一对多可以根据List和Set来实现，两者在mybitis中都是通过collection标签来配合来加以实现 -->
 		<collection property="posts" ofType="com.huanle.mybatis.models.Post"
 			column="userid">
 			<id property="id" column="post_id" javaType="int" jdbcType="INTEGER" />
@@ -23,7 +24,29 @@
 	<select id="getUser" resultMap="resultUserMap" parameterType="int">
 		SELECT u.*,p.*
 		FROM forum_user u, post p
-		WHERE u.id=p.userid AND id=#{user_id}
+		WHERE u.id=p.userid AND
+		id=#{user_id}
+	</select>
+
+	<!-- User 级联文章查询 方法配置 (多个文章对一个用户) -->
+
+	<resultMap type="Post" id="resultPostsMap">
+		<result property="id" column="post_id" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<!-- 使用到了一个 <association>标签，关联对应的 User 类 -->
+		<association property="user" javaType="User">
+			<id property="id" column="userid" />
+			<result property="username" column="username" />
+			<result property="mobile" column="mobile" />
+		</association>
+	</resultMap>
+
+	<select id="getPosts" resultMap="resultPostsMap" parameterType="int">
+		SELECT u.*,p.*
+		FROM forum_user u, post p
+		WHERE u.id=p.userid AND
+		p.post_id=#{post_id}
 	</select>
 
 </mapper>

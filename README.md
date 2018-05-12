@@ -1,4 +1,5 @@
 # mybatisOne2Many
+# mybatisMany2One
 
 ##user数据库初始化
 

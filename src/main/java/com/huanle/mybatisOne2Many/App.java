@@ -32,9 +32,9 @@ public class App {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
+			//读取一个user的post信息，一个用户包含多个post信息
 			int userid = 1;
 			User user = session.selectOne("com.huanle.userMaper.getUser", userid);
 			System.out.println("username: " + user.getUsername() + ",");
@@ -43,6 +43,11 @@ public class App {
 				System.out.println("Title:" + p.getTitle());
 				System.out.println("Content:" + p.getContent());
 			}
+			//首先根据帖子 ID 读取一个帖子信息，然后再读取这个帖子所属的用户信息
+			int postId = 1;
+			Post post = session.selectOne("com.huanle.userMaper.getPosts", postId);
+			System.out.println("title: " + post.getTitle());
+			System.out.println("userName: " + post.getUser().getUsername());
 		} finally {
 			session.close();
 		}
