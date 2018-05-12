@@ -36,6 +36,9 @@ public class App {
 		try {
 			//读取一个user的post信息，一个用户包含多个post信息
 			int userid = 1;
+//			请注意，这种方式是用 SqlSession 实例来直接执行已映射的SQL语句：
+//			session.selectOne("com.yihaomen.mybatis.models.UserMapper.selectUserByID", 1) 
+//			其实还有更简单的方法，而且是更好的方法，使用合理描述参数和SQL语句返回值的接口（比如 IUserOperation.class）
 			User user = session.selectOne("com.huanle.userMaper.getUser", userid);
 			System.out.println("username: " + user.getUsername() + ",");
 			List<Post> posts = user.getPosts();
