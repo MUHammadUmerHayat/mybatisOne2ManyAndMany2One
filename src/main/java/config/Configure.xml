@@ -2,7 +2,8 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <typeAliases>
+<!-- 这里需要注意的是 <typeAliases> 这个标签内容，它就是用于定义一个 JavaBean 类的别名-->    
+	<typeAliases>
         <typeAlias alias="User" type="com.huanle.mybatis.models.User" />
         <typeAlias alias="Post" type="com.huanle.mybatis.models.Post" />
     </typeAliases>
@@ -12,7 +13,7 @@
             <transactionManager type="JDBC" />
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://localhost:3306/demoDB" />
+                <property name="url" value="jdbc:mysql://localhost:3306/demoDB?useSSL=false" />
                 <property name="username" value="root" />
                 <property name="password" value="123456" />
             </dataSource>

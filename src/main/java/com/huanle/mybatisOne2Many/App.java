@@ -1,7 +1,6 @@
 package com.huanle.mybatisOne2Many;
 
 import java.io.Reader;
-import java.text.MessageFormat;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -37,7 +36,7 @@ public class App {
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
 			int userid = 1;
-			User user = session.selectOne("com.huanle.userMaper.getUser", 1);
+			User user = session.selectOne("com.huanle.userMaper.getUser", userid);
 			System.out.println("username: " + user.getUsername() + ",");
 			List<Post> posts = user.getPosts();
 			for (Post p : posts) {
